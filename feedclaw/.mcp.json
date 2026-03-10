@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "feedclaw": {
-      "type": "http",
+      "type": "url",
       "url": "https://www.feedclaw.io/api/mcp"
     }
   }
