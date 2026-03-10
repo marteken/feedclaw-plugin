@@ -2,51 +2,44 @@
 
 FeedClaw is an AI-native content publishing platform. Content goes through an approval inbox before publishing.
 
-## ⚠️ FIRST: Check if tools are available
+## ⚠️ FIRST: Check if FeedClaw tools are available
 
-Before doing anything, check whether the FeedClaw MCP tools (`get_brands`, `create_draft`, etc.) are available.
+Before doing anything, check whether the FeedClaw MCP tools (`get_brands`, `create_draft`, etc.) are available and authenticated.
 
-### If tools are NOT available (Cowork / Claude.ai)
+### If tools fail or are not available
 
-Tell the user exactly this:
+Show the user this message — keep it short and actionable:
 
-> "To use FeedClaw, you need to add it as a connector first:
-> 1. Go to **Claude Settings → Connectors**
-> 2. Click **Add connector**
-> 3. Enter the URL: `https://www.feedclaw.io/api/mcp`
-> 4. Save and come back here
+> **FeedClaw needs a one-time setup:**
 >
-> Once the connector is added, I'll walk you through signing in."
+> **Step 1:** [Add FeedClaw connector](https://claude.ai/settings/connectors?modal=add-custom-connector)
+> → Name: `FeedClaw` | URL: `https://www.feedclaw.io/api/mcp` → click **Add**
+>
+> **Step 2:** Come back here and I'll walk you through signing in (takes 30 seconds).
 
-Do NOT attempt to call any tools until the user confirms the connector is added.
+Wait for the user to confirm Step 1 is done, then run `/feedclaw:connect` for Step 2.
 
-### If tools ARE available but unauthenticated
+### If tools are available but unauthenticated (error -32001)
 
-If any tool returns error code `-32001` or "Authentication required":
-1. Call `connect_feedclaw` to start authentication
-2. Show the user: "Visit **feedclaw.io/activate** and enter this code: `{user_code}`"
-3. Poll `check_connection` every 5 seconds until approved
-4. Confirm: "✅ FeedClaw connected. Let's continue."
+Call `connect_feedclaw` → show user_code → direct to **[feedclaw.io/activate](https://www.feedclaw.io/activate)** → poll until connected.
 
-### If tools ARE available and authenticated
+### If tools are available and authenticated
 
-Proceed directly with the user's request.
+Proceed directly with the request.
 
 ---
 
 ## How it works
 
-1. **Draft** — content created and sent to inbox (`pending_approval`)
-2. **Approve** — human reviews and approves; FeedClaw queues for publishing
+1. **Draft** — content sent to inbox (`pending_approval`)
+2. **Approve** — human reviews; FeedClaw queues for publishing
 3. **Publish** — FeedClaw publishes to connected channel (X, email)
 
 ## Two modes
 
-**Explicit action** (post / publish / send / schedule):
-→ Create draft + immediately approve. No second confirmation needed.
+**Explicit action** (post / publish / send / schedule) → Create draft + immediately approve.
 
-**Generation** (draft / write / create / generate / prepare):
-→ Create draft only. Leave in inbox for human review.
+**Generation** (draft / write / create / generate) → Create draft only, leave in inbox.
 
 ## Key rules
 
