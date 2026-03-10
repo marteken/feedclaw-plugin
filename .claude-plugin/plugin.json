@@ -1,0 +1,9 @@
+{
+  "name": "feedclaw",
+  "version": "1.0.0",
+  "description": "Publish content to X (Twitter) and email newsletters via FeedClaw. Draft, schedule, and approve posts without leaving Claude.",
+  "author": {
+    "name": "FeedClaw",
+    "url": "https://www.feedclaw.io"
+  }
+}
