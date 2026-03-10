@@ -8,16 +8,20 @@ Before doing anything, check whether the FeedClaw MCP tools (`get_brands`, `crea
 
 ### If tools fail or are not available
 
-Show the user this message — keep it short and actionable:
+**STOP immediately. Do not draft content. Do not write copy. Do not plan anything.**
 
-> **FeedClaw needs a one-time setup:**
+Show ONLY this message — nothing else:
+
+> **FeedClaw needs a one-time setup before we can publish:**
 >
 > **Step 1:** [Add FeedClaw connector](https://claude.ai/settings/connectors?modal=add-custom-connector)
 > → Name: `FeedClaw` | URL: `https://www.feedclaw.io/api/mcp` → click **Add**
 >
-> **Step 2:** Come back here and I'll walk you through signing in (takes 30 seconds).
+> **Step 2:** Come back here once it's added — I'll walk you through signing in (30 seconds).
 
-Wait for the user to confirm Step 1 is done, then run `/feedclaw:connect` for Step 2.
+**Do not write drafts, outlines, or previews while waiting. Wait silently for the user to confirm Step 1 is complete.**
+
+Once confirmed, proceed to Step 2 (authentication).
 
 ### If tools are available but unauthenticated (error -32001)
 
